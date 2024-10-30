@@ -1,5 +1,6 @@
 import { CellsPage } from '@cells/cells-page';
-import { html } from 'lit-element';
+import { html, css } from 'lit-element';
+import '@bbva-experience-components/bbva-button-default/bbva-button-default.js';
 import '@pokemon/evolution-pokemon-ui/evolution-pokemon-ui.js';
 
 class EvolutionPage extends CellsPage {
@@ -16,13 +17,9 @@ class EvolutionPage extends CellsPage {
   connectedCallback() {
     super.connectedCallback();
     this.addEventListener('navigate-to-pokemon', () => this.navigate('pokemon'));
-  }
-
-  // Captura el valor de la ruta antes de renderizar
-  willUpdate(changedProperties) {
-    if (changedProperties.has('routeParams')) {
-      this.pokemonName = this.routeParams.name; 
-    }
+    this.addEventListener('navigate-to-evolution', (e) => {
+      this.pokemonName = e.detail.pokemonName;
+    });
   }
 
   render() {
